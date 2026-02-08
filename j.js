@@ -339,7 +339,7 @@ const builtins = {
     if (!text) return;
     try {
       const result = execSync(
-        `echo ${JSON.stringify(text)} | curl -s -F "content=<-" https://dpaste.com/api/v2/`,
+        `echo ${JSON.stringify(text)} | curl -s --max-time 10 -d @- https://paste.rs/`,
         { shell: "/bin/bash" }
       );
       const url = result.toString().trim();
