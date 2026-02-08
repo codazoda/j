@@ -14,7 +14,7 @@ mkdir -p "$SHARE_DIR"
 echo "Installing j..."
 
 # Download files
-for file in j.js menus.json VERSION; do
+for file in j.js menus.json; do
   echo "  Downloading $file..."
   curl -sL "$BASE_URL/$file" -o "$SHARE_DIR/$file"
 done

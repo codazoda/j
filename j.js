@@ -382,7 +382,7 @@ function install() {
   mkdirSync(binDir, { recursive: true });
 
   // Copy application files
-  for (const file of ["j.js", "menus.json", "VERSION"]) {
+  for (const file of ["j.js", "menus.json"]) {
     const src = join(__dirname, file);
     const dest = join(shareDir, file);
     if (existsSync(src)) copyFileSync(src, dest);
@@ -446,24 +446,30 @@ function autoUpdate() {
   const shareDir = join(homedir(), ".local", "share", "j");
 
   try {
-    // Check remote version (1s timeout)
-    const remoteVer = execSync(`curl -sf --max-time 1 "${base}/VERSION"`, {
-      shell: "/bin/bash",
-    }).toString().trim();
+    // Check latest commit SHA (1s timeout)
+    const remoteSha = execSync(
+      `curl -sf --max-time 1 -H "Accept: application/vnd.github.sha" "https://api.github.com/repos/${repo}/commits/${branch}"`,
+      { shell: "/bin/bash" }
+    ).toString().trim();
 
-    const localVerFile = join(shareDir, "VERSION");
-    const localVer = existsSync(localVerFile)
-      ? readFileSync(localVerFile, "utf-8").trim()
-      : "0.0.0";
+    const shaFile = join(shareDir, ".commit");
+    const localSha = existsSync(shaFile) ? readFileSync(shaFile, "utf-8").trim() : "";
 
-    if (remoteVer === localVer) return;
+    if (remoteSha === localSha) return;
 
-    // New version available — pull files silently
-    for (const file of ["j.js", "menus.json", "VERSION"]) {
+    // New commit available — pull files silently
+    for (const file of ["j.js", "menus.json"]) {
       execSync(`curl -sf --max-time 3 "${base}/${file}" -o "${join(shareDir, file)}"`, {
         shell: "/bin/bash",
       });
     }
+    writeFileSync(shaFile, remoteSha);
+
+    // Re-exec with updated code
+    execSync(`node "${join(shareDir, "j.js")}" ${process.argv.slice(2).join(" ")}`, {
+      stdio: "inherit",
+    });
+    process.exit(0);
   } catch {
     // Offline or error — continue with current version
   }
