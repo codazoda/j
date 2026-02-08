@@ -32,6 +32,15 @@ to git commit — four keystrokes from your shell to a committed change.
 Press a highlighted letter to select a menu item. Press `ESC` to quit from any
 menu.
 
+## Environment Variables
+
+`BITLY_TOKEN` — Required for the Web > Bitly URL shortener. Generate a token at
+https://app.bitly.com/settings/api/ and add to your shell profile:
+
+```bash
+export BITLY_TOKEN="your_token_here"
+```
+
 ## Customization
 
 Edit `~/.local/share/j/menus.json` to add, remove, or rearrange menu items.

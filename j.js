@@ -285,7 +285,10 @@ const builtins = {
     const url = await promptUser("URL to shorten: ");
     if (!url) return;
     const token = process.env.BITLY_TOKEN || "";
-    if (!token) return;
+    if (!token) {
+      process.stdout.write("Set BITLY_TOKEN in your shell profile.\n");
+      return;
+    }
     try {
       const result = execSync(
         `curl -s -X POST "https://api-ssl.bitly.com/v4/shorten" -H "Authorization: Bearer ${token}" -H "Content-Type: application/json" -d '{"long_url":"${url}"}'`,
