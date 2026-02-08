@@ -333,6 +333,23 @@ const builtins = {
       });
     } catch {}
   },
+
+  async pasteOnline() {
+    const text = await promptUser("Text to paste: ");
+    if (!text) return;
+    try {
+      const result = execSync(
+        `echo ${JSON.stringify(text)} | curl -s -F "content=<-" https://dpaste.com/api/v2/`,
+        { shell: "/bin/bash" }
+      );
+      const url = result.toString().trim();
+      process.stdout.write(`${url}\n`);
+      try {
+        execSync(`echo -n "${url}" | ${clipboardCopyCmd()}`, { shell: "/bin/bash" });
+        process.stdout.write("(copied to clipboard)\n");
+      } catch {}
+    } catch {}
+  },
 };
 
 // ── Cleanup ─────────────────────────────────────────────────────────────────

@@ -7,7 +7,6 @@
       { "key": "e", "label": "dit", "submenu": "edit" },
       { "key": "n", "label": "avigate", "submenu": "navigate" },
       { "key": "w", "label": "eb", "submenu": "web" },
-      { "key": "t", "label": "ools", "submenu": "tools" },
       { "key": "r", "label": "ecent", "action": { "type": "shell", "cmd": "ls -lt | head -n 25" } },
       { "key": "q", "label": "uit", "action": { "type": "quit" } }
     ]
@@ -56,15 +55,7 @@
       { "key": "s", "label": "tatus", "action": { "type": "function", "name": "statusUpdate" } },
       { "key": "b", "label": "itly", "action": { "type": "function", "name": "bitlyShorten" } },
       { "key": "k", "label": "eyword", "action": { "type": "function", "name": "keyword" } },
-      { "key": "q", "label": "uit to Main", "action": { "type": "back" } }
-    ]
-  },
-  "tools": {
-    "title": "Tools",
-    "items": [
-      { "key": "l", "label": "og", "action": { "type": "function", "name": "logEntry" } },
-      { "key": "c", "label": "opy", "action": { "type": "function", "name": "clipboardCopy" } },
-      { "key": "p", "label": "aste", "action": { "type": "function", "name": "clipboardPaste" } },
+      { "key": "p", "label": "aste Online", "action": { "type": "function", "name": "pasteOnline" } },
       { "key": "q", "label": "uit to Main", "action": { "type": "back" } }
     ]
   }
