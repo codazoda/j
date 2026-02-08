@@ -1,10 +1,10 @@
 #!/bin/bash
 # j — BBS-style menu CLI installer
-# Usage: curl -sL https://raw.githubusercontent.com/joeldare/j/main/install.sh | bash
+# Usage: curl -sL https://raw.githubusercontent.com/codazoda/j/main/install.sh | bash
 
 set -e
 
-REPO="joeldare/j"
+REPO="codazoda/j"
 BRANCH="main"
 BASE_URL="https://raw.githubusercontent.com/$REPO/$BRANCH"
 

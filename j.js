@@ -420,7 +420,7 @@ function install() {
 
 // ── Auto-update ─────────────────────────────────────────────────────────────
 function autoUpdate() {
-  const repo = "joeldare/j";
+  const repo = "codazoda/j";
   const branch = "main";
   const base = `https://raw.githubusercontent.com/${repo}/${branch}`;
   const shareDir = join(homedir(), ".local", "share", "j");

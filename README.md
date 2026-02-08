@@ -11,7 +11,7 @@ customize.
 Requires Node.js 18+.
 
 ```bash
-curl -sL https://raw.githubusercontent.com/joeldare/j/main/install.sh | bash
+curl -sL https://raw.githubusercontent.com/codazoda/j/main/install.sh | bash
 ```
 
 Then restart your shell, or:
