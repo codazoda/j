@@ -1,0 +1,71 @@
+{
+  "main": {
+    "title": "Main",
+    "items": [
+      { "key": "g", "label": "it", "submenu": "git" },
+      { "key": "f", "label": "ind", "submenu": "find" },
+      { "key": "e", "label": "dit", "submenu": "edit" },
+      { "key": "n", "label": "avigate", "submenu": "navigate" },
+      { "key": "w", "label": "eb", "submenu": "web" },
+      { "key": "t", "label": "ools", "submenu": "tools" },
+      { "key": "r", "label": "ecent", "action": { "type": "shell", "cmd": "ls -lt | head -n 25" } },
+      { "key": "q", "label": "uit", "action": { "type": "quit" } }
+    ]
+  },
+  "git": {
+    "title": "Git",
+    "items": [
+      { "key": "c", "label": "ommit", "action": { "type": "function", "name": "gitCommit" } },
+      { "key": "p", "label": "ush", "action": { "type": "function", "name": "gitPush" } },
+      { "key": "s", "label": "tatus", "action": { "type": "function", "name": "gitStatus" } },
+      { "key": "l", "label": "og", "action": { "type": "function", "name": "gitLog" } },
+      { "key": "d", "label": "iff", "action": { "type": "shell", "cmd": "git diff" } },
+      { "key": "a", "label": "dd all", "action": { "type": "shell", "cmd": "git add -A" } },
+      { "key": "q", "label": "uit to Main", "action": { "type": "back" } }
+    ]
+  },
+  "find": {
+    "title": "Find",
+    "items": [
+      { "key": "f", "label": "ile", "action": { "type": "function", "name": "findFile" } },
+      { "key": "s", "label": "tring", "action": { "type": "function", "name": "findString" } },
+      { "key": "q", "label": "uit to Main", "action": { "type": "back" } }
+    ]
+  },
+  "edit": {
+    "title": "Edit",
+    "items": [
+      { "key": "r", "label": "c file", "action": { "type": "shell", "cmd": "${EDITOR:-zed} ~/.zshrc" } },
+      { "key": "b", "label": "ooks", "action": { "type": "shell", "cmd": "cd ~/sandbox/joeldare.com && ${EDITOR:-zed} ./books.md" } },
+      { "key": "m", "label": "orning", "action": { "type": "shell", "cmd": "${EDITOR:-zed} ~/sandbox/morning" } },
+      { "key": "q", "label": "uit to Main", "action": { "type": "back" } }
+    ]
+  },
+  "navigate": {
+    "title": "Navigate",
+    "items": [
+      { "key": "s", "label": "andbox", "action": { "type": "cd", "dir": "~/sandbox" } },
+      { "key": "j", "label": "oeldare", "action": { "type": "cd", "dir": "~/joeldare.com" } },
+      { "key": "d", "label": "raft", "action": { "type": "cd", "dir": "~/sandbox/draft" } },
+      { "key": "q", "label": "uit to Main", "action": { "type": "back" } }
+    ]
+  },
+  "web": {
+    "title": "Web",
+    "items": [
+      { "key": "s", "label": "tatus", "action": { "type": "function", "name": "statusUpdate" } },
+      { "key": "b", "label": "itly", "action": { "type": "function", "name": "bitlyShorten" } },
+      { "key": "k", "label": "eyword", "action": { "type": "function", "name": "keyword" } },
+      { "key": "q", "label": "uit to Main", "action": { "type": "back" } }
+    ]
+  },
+  "tools": {
+    "title": "Tools",
+    "items": [
+      { "key": "l", "label": "og", "action": { "type": "function", "name": "logEntry" } },
+      { "key": "c", "label": "opy", "action": { "type": "function", "name": "clipboardCopy" } },
+      { "key": "p", "label": "aste", "action": { "type": "function", "name": "clipboardPaste" } },
+      { "key": "q", "label": "uit to Main", "action": { "type": "back" } }
+    ]
+  }
+}

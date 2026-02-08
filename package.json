@@ -1,0 +1,10 @@
+{
+  "name": "j-menu",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "BBS-style menu CLI",
+  "main": "j.js",
+  "scripts": {
+    "build": "node j.js --install-only"
+  }
+}
