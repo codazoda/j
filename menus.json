@@ -45,7 +45,7 @@
     "title": "Change Directory",
     "items": [
       { "key": "s", "label": "andbox", "action": { "type": "cd", "dir": "~/sandbox" } },
-      { "key": "j", "label": "oeldare", "action": { "type": "cd", "dir": "~/joeldare.com" } },
+      { "key": "j", "label": "oeldare", "action": { "type": "cd", "dir": "~/sandbox/joeldare.com" } },
       { "key": "d", "label": "raft", "action": { "type": "cd", "dir": "~/sandbox/draft" } },
       { "key": "q", "label": "uit to Main", "action": { "type": "back" } }
     ]
