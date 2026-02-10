@@ -407,6 +407,7 @@ function install() {
   if [[ -f "$cd_file" ]]; then
     cd "$(cat "$cd_file")"
     rm -f "$cd_file"
+    pwd
   fi
 }
 `

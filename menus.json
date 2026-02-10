@@ -5,8 +5,9 @@
       { "key": "g", "label": "it", "submenu": "git" },
       { "key": "f", "label": "ind", "submenu": "find" },
       { "key": "e", "label": "dit", "submenu": "edit" },
-      { "key": "n", "label": "avigate", "submenu": "navigate" },
+      { "key": "c", "label": "hange Directory", "submenu": "navigate" },
       { "key": "w", "label": "eb", "submenu": "web" },
+      { "key": "a", "label": "i", "submenu": "ai" },
       { "key": "r", "label": "ecent", "action": { "type": "shell", "cmd": "ls -lt | head -n 25" } },
       { "key": "q", "label": "uit", "action": { "type": "quit" } }
     ]
@@ -41,7 +42,7 @@
     ]
   },
   "navigate": {
-    "title": "Navigate",
+    "title": "Change Directory",
     "items": [
       { "key": "s", "label": "andbox", "action": { "type": "cd", "dir": "~/sandbox" } },
       { "key": "j", "label": "oeldare", "action": { "type": "cd", "dir": "~/joeldare.com" } },
@@ -56,6 +57,13 @@
       { "key": "b", "label": "itly", "action": { "type": "function", "name": "bitlyShorten" } },
       { "key": "k", "label": "eyword", "action": { "type": "function", "name": "keyword" } },
       { "key": "p", "label": "aste Online", "action": { "type": "function", "name": "pasteOnline" } },
+      { "key": "q", "label": "uit to Main", "action": { "type": "back" } }
+    ]
+  },
+  "ai": {
+    "title": "Ai",
+    "items": [
+      { "key": "o", "label": "pus", "action": { "type": "shell", "cmd": "claude --model opusplan" } },
       { "key": "q", "label": "uit to Main", "action": { "type": "back" } }
     ]
   }
