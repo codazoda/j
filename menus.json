@@ -8,6 +8,7 @@
       { "key": "c", "label": "hange Directory", "submenu": "navigate" },
       { "key": "w", "label": "eb", "submenu": "web" },
       { "key": "a", "label": "i", "submenu": "ai" },
+      { "key": "o", "label": "pen", "submenu": "open" },
       { "key": "r", "label": "ecent", "action": { "type": "shell", "cmd": "ls -lt | head -n 25" } },
       { "key": "q", "label": "uit", "action": { "type": "quit" } }
     ]
@@ -64,6 +65,13 @@
     "title": "Ai",
     "items": [
       { "key": "o", "label": "pus", "action": { "type": "shell", "cmd": "claude --model opusplan" } },
+      { "key": "q", "label": "uit to Main", "action": { "type": "back" } }
+    ]
+  },
+  "open": {
+    "title": "Open",
+    "items": [
+      { "key": "s", "label": "lipbox", "action": { "type": "shell", "cmd": "open https://192.168.0.10:8001" } },
       { "key": "q", "label": "uit to Main", "action": { "type": "back" } }
     ]
   }
