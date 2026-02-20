@@ -11,13 +11,41 @@ customize.
 Requires Node.js 18+.
 
 ```bash
-curl -sL https://raw.githubusercontent.com/codazoda/j/main/install.sh | bash
+git clone https://github.com/codazoda/j.git ~/sandbox/j
+echo 'source ~/sandbox/j/j.sh' >> ~/.zshrc  # or ~/.bashrc for bash
 ```
 
 Then restart your shell, or:
 
 ```bash
-source ~/.local/share/j/j.sh
+source ~/sandbox/j/j.sh
+```
+
+## Uninstall
+
+To remove `j`:
+
+```bash
+rm -rf ~/sandbox/j
+```
+
+Then remove the `source ~/sandbox/j/j.sh` line from your `~/.zshrc` or `~/.bashrc`.
+
+If you previously used the old `install.sh` method, also remove:
+
+```bash
+rm -rf ~/.local/share/j
+rm -f ~/.local/bin/j
+```
+
+And remove any `source ~/.local/share/j/j.sh` line from your shell config.
+
+## Update
+
+Since `j` runs directly from the cloned repo, updates are automatic with git:
+
+```bash
+cd ~/sandbox/j && git pull
 ```
 
 ## Usage
@@ -43,7 +71,7 @@ export BITLY_TOKEN="your_token_here"
 
 ## Customization
 
-Edit `~/.local/share/j/menus.json` to add, remove, or rearrange menu items.
+Edit `~/sandbox/j/menus.json` (or wherever you cloned the repo) to add, remove, or rearrange menu items. You can also use the `j add` command to interactively add new menu items.
 
 Set the `J_MODE` environment variable to filter items by mode (items with a
 matching `modes` array will be shown).
