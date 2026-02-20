@@ -476,10 +476,142 @@ function autoUpdate() {
   }
 }
 
+// ── Add menu item ───────────────────────────────────────────────────────────
+async function addMenuItem() {
+  const rl = createInterface({ input: process.stdin, output: process.stdout });
+
+  const question = (prompt) => new Promise((resolve) => {
+    rl.question(prompt, resolve);
+  });
+
+  try {
+    console.log("\n=== Add Menu Item ===\n");
+
+    const mainKey = await question("Main menu key (e.g., 'o'): ");
+    if (!mainKey) {
+      console.log("Cancelled.");
+      rl.close();
+      return;
+    }
+
+    const mainLabel = await question("Main menu label (e.g., 'pen'): ");
+    if (!mainLabel) {
+      console.log("Cancelled.");
+      rl.close();
+      return;
+    }
+
+    const submenu = await question("Submenu name (e.g., 'open'): ");
+    if (!submenu) {
+      console.log("Cancelled.");
+      rl.close();
+      return;
+    }
+
+    const submenuKey = await question("Submenu item key (e.g., 's'): ");
+    if (!submenuKey) {
+      console.log("Cancelled.");
+      rl.close();
+      return;
+    }
+
+    const submenuLabel = await question("Submenu item label (e.g., 'lipbox'): ");
+    if (!submenuLabel) {
+      console.log("Cancelled.");
+      rl.close();
+      return;
+    }
+
+    const command = await question("Command to execute: ");
+    if (!command) {
+      console.log("Cancelled.");
+      rl.close();
+      return;
+    }
+
+    rl.close();
+
+    // Load current menus
+    const menusPath = join(__dirname, "menus.json");
+    const menus = JSON.parse(readFileSync(menusPath, "utf-8"));
+
+    // Check if main menu has this submenu reference
+    const mainMenu = menus.main;
+    const existingMainItem = mainMenu.items.find(item => item.key === mainKey);
+
+    if (!existingMainItem) {
+      // Find the quit item
+      const quitIndex = mainMenu.items.findIndex(item => item.action?.type === "quit");
+      // Insert before quit
+      const insertIndex = quitIndex >= 0 ? quitIndex : mainMenu.items.length;
+      mainMenu.items.splice(insertIndex, 0, {
+        key: mainKey,
+        label: mainLabel,
+        submenu: submenu
+      });
+      console.log(`\nAdded '${mainKey}' to main menu.`);
+    } else if (existingMainItem.submenu !== submenu) {
+      console.log(`\nWarning: Main menu key '${mainKey}' already exists with submenu '${existingMainItem.submenu}'.`);
+      console.log(`Not modifying main menu.`);
+    }
+
+    // Create or update submenu
+    if (!menus[submenu]) {
+      menus[submenu] = {
+        title: submenu.charAt(0).toUpperCase() + submenu.slice(1),
+        items: []
+      };
+      console.log(`Created new submenu: ${submenu}`);
+    }
+
+    // Check if item already exists in submenu
+    const existingItem = menus[submenu].items.find(item => item.key === submenuKey);
+    if (existingItem) {
+      console.log(`\nWarning: Item with key '${submenuKey}' already exists in '${submenu}' submenu.`);
+      console.log(`Not adding duplicate item.`);
+    } else {
+      // Find quit item in submenu
+      const quitIndex = menus[submenu].items.findIndex(item => item.action?.type === "back");
+
+      // Add quit item if it doesn't exist
+      if (quitIndex === -1) {
+        menus[submenu].items.push({
+          key: "q",
+          label: "uit to Main",
+          action: { type: "back" }
+        });
+      }
+
+      // Insert new item before quit
+      const insertIndex = quitIndex >= 0 ? quitIndex : menus[submenu].items.length - 1;
+      menus[submenu].items.splice(insertIndex, 0, {
+        key: submenuKey,
+        label: submenuLabel,
+        action: { type: "shell", cmd: command }
+      });
+
+      console.log(`Added '${submenuKey}' to '${submenu}' submenu.`);
+    }
+
+    // Write updated menus
+    writeFileSync(menusPath, JSON.stringify(menus, null, 2) + "\n");
+    console.log(`\nMenus updated successfully!\n`);
+
+  } catch (error) {
+    console.error("Error adding menu item:", error.message);
+    rl.close();
+  }
+}
+
 // ── Handle --install-only ───────────────────────────────────────────────────
 if (process.argv.includes("--install-only")) {
   install();
   process.exit(0);
+}
+
+// ── Handle add command ──────────────────────────────────────────────────────
+if (process.argv.includes("add")) {
+  addMenuItem().then(() => process.exit(0));
 }
 
 // ── Main loop ───────────────────────────────────────────────────────────────
